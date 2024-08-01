@@ -57,6 +57,13 @@ def Word_Order_Frequency_One_Book(Book, Word_Order, File_Output="output.txt"):
 
     newtext = []
 
+    #NOTE: The comment below may not be as descriptive, but what's essentially
+    #happening is that it combines adjacent words to be one word in a list of
+    #words taken from an inputted text file.
+    #Example: "Lorem ipsum dolor sit amet."
+    #Output (Word_Order = 1): ["lorem", "ipsum", "dolor", "sit", "amet"]
+    #Output (Word_Order = 2): ["lorem ipsum", "ipsum dolor", "dolor sit", "sit amet"]
+    
     #set of groups
     if Word_Order == 1 :
         newtext = hold
@@ -74,6 +81,9 @@ def Word_Order_Frequency_One_Book(Book, Word_Order, File_Output="output.txt"):
 
     order = []
     
+    
+    #NOTE: It was not required, but I also provided a progress percentage to let the
+    #user know how much of the text was processed.
     progress = 0
     for word in newtext :
         exists = False
@@ -102,6 +112,10 @@ def Word_Order_Frequency_One_Book(Book, Word_Order, File_Output="output.txt"):
             
 
             #sort
+            
+            #NOTE: Instead of looking through the order list one by one to find the spot the
+            #new word is going to, I simply made a list of indexes for each score level for
+            #faster list insertion.
             if order[index-1][1] < order[index][1] :
                 store = order[index]
                 order.pop(index)
@@ -122,6 +136,9 @@ SEQUENCE   | FREQUENCY
     for x in order :
         output.write(x[0]+"     "+str(x[1])+"\n")
     output.close()
+    
+    
+#NOTE: This function is essentially the same as the one above, except with two books.
     
 def Word_Order_Frequency_Two_Books(Book_1, Book_2, Word_Order, File_Output):
 
